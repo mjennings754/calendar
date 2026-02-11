@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_11_223144) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_11_224600) do
+  create_table "tenants", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name"
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_tenants_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "email"
@@ -21,4 +29,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_11_223144) do
     t.boolean "verified", default: false
     t.index ["verification_token"], name: "index_users_on_verification_token", unique: true
   end
+
+  add_foreign_key "tenants", "users"
 end

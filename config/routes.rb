@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :tenants
   get "dashboard" => "dashboard#home"
   controller :sessions do
     get "login" => :new
