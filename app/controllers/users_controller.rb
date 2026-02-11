@@ -16,6 +16,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      UserMailer.email_verification(@user).deliver_later
       redirect_to @user
     else
       render :new
@@ -33,6 +34,16 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy!
   end
+
+  def verify_email
+    @user = User.find_by(verification_token: params[:token])
+    if @user&.verify_email(params[:token])
+      redirect_to users_path, notice: "Your email has been verified"
+    else
+      redirect_to users_path, notice: "Invalid token"
+    end
+  end
+
 
   private
 

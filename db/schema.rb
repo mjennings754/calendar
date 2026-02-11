@@ -10,12 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_11_221521) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_11_223144) do
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "email"
     t.string "password_digest"
     t.datetime "updated_at", null: false
     t.string "username"
+    t.string "verification_token"
+    t.boolean "verified", default: false
+    t.index ["verification_token"], name: "index_users_on_verification_token", unique: true
   end
 end
