@@ -6,3 +6,7 @@
     <%= form.text_field :username %>
     <%= form.submit "Add seat" %>
 <% end %>
+<p><%= link_to "Create schedule", new_tenant_schedule_path(@tenant) %></p>
+<% @tenant.schedules.each do |schedule| %>
+    <%= link_to schedule.name, [@tenant, schedule] %>
+<% end %>

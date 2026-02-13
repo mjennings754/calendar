@@ -4,4 +4,5 @@ class Tenant < ApplicationRecord
   has_many :seats, dependent: :destroy
   has_many :users, through: :seats
   belongs_to :parent, class_name: "User", foreign_key: "user_id"
+  has_many :schedules
 end
