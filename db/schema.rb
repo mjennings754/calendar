@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_13_001719) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_13_003457) do
+  create_table "events", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.text "description"
+    t.datetime "end_time"
+    t.integer "schedule_id", null: false
+    t.datetime "start_time"
+    t.string "title"
+    t.datetime "updated_at", null: false
+    t.index ["schedule_id"], name: "index_events_on_schedule_id"
+  end
+
   create_table "schedules", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name"
@@ -47,6 +58,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_13_001719) do
     t.index ["verification_token"], name: "index_users_on_verification_token", unique: true
   end
 
+  add_foreign_key "events", "schedules"
   add_foreign_key "schedules", "tenants"
   add_foreign_key "seats", "tenants"
   add_foreign_key "seats", "users"

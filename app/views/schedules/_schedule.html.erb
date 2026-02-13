@@ -10,3 +10,7 @@
   </div>
 
 </div>
+<% @schedule.events.each do |event| %>
+  <p><%= event.title %></p>
+  <p><%= event.start_time %> - <%= event.end_time %>
+<% end %>

@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :tenants do
-      resources :schedules
+      resources :schedules do
+          resources :events
+      end
       resources :seats
   end
   get "dashboard" => "dashboard#home"
